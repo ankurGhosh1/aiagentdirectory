@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import Categories from "./Categories";
+
 interface HeroProps {
   title: string;
 }
 
 function Hero({ title }: HeroProps) {
-  // Using function declaration
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState<string | null>(null);
   const splitTitle = title.split("<br />");
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/submit-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setMessage("Subscription successful! 🎉");
+        setEmail(""); // Clear input
+      } else {
+        const errorData = await response.json();
+        setMessage(errorData.error || "Failed to subscribe. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setMessage("An unexpected error occurred. Please try again.");
+    }
+  };
 
   return (
     <section className="text-white py-16">
@@ -33,16 +65,39 @@ function Hero({ title }: HeroProps) {
         </p>
 
         {/* Email Subscription Form */}
-        <div className="max-w-md mx-auto flex items-center flex-col md:flex-row gap-4">
+        <form
+          className="max-w-md mx-auto flex items-center flex-col md:flex-row gap-4"
+          onSubmit={handleSubscribe}
+        >
           <input
             type="email"
             placeholder="Your Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="bg-gray-800 border border-gray-700 rounded-md px-4 py-3 w-full md:w-auto text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
-          <button className="bg-white hover:bg-white-500 text-black font-medium py-3 px-6 rounded-md hover:bg-gray-100 transition duration-300 w-full md:w-auto flex-1">
+          <button
+            type="submit"
+            className="bg-white hover:bg-white-500 text-black font-medium py-3 px-6 rounded-md hover:bg-gray-100 transition duration-300 w-full md:w-auto flex-1"
+          >
             Subscribe
           </button>
-        </div>
+        </form>
+
+        {/* Feedback Message */}
+        {message && (
+          <p
+            className={`text-sm mt-4 ${
+              typeof message === "string" &&
+              message.startsWith("Subscription successful")
+                ? "text-green-400"
+                : "text-red-400"
+            }`}
+          >
+            {message}
+          </p>
+        )}
 
         {/* Join Community Text */}
         <p className="text-sm mt-6 text-gray-400">

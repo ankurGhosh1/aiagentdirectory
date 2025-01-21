@@ -44,7 +44,7 @@ module.exports = {
         industry: "real-estate",
       },
       {
-        industry: "finance ",
+        industry: "finance",
       },
       {
         industry: "manufacturing",
