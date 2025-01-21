@@ -8,32 +8,4 @@ module.exports = {
   robotsTxtOptions: {
     policies: [{ userAgent: "*", allow: "/" }],
   },
-  additionalPaths: async (config) => {
-    const paths = [];
-
-    // Fetch the slug and industry data from the API
-    const response = await fetch(`https://aiagentlisting.com/api/slugs`);
-    if (response.headers.get("content-type").includes("application/json")) {
-      const data = await response.json();
-    } else {
-      throw new Error("Unexpected content type");
-    }
-
-    // Generate paths for /categories/[industry]
-    data.forEach(({ slug, industry }) => {
-      // Path for /categories/[industry]
-      paths.push({
-        loc: `/categories/${industry}`,
-        lastmod: new Date().toISOString(),
-      });
-
-      // Path for /categories/[slug]
-      paths.push({
-        loc: `/categories/${slug}`,
-        lastmod: new Date().toISOString(),
-      });
-    });
-
-    return paths;
-  },
 };
