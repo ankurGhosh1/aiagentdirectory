@@ -20,7 +20,7 @@ const AgentCard = ({ agent }: { agent: Agent }) => {
     <Link href={`/agents/${agent.slug}`} key={agent._id} className="block">
       <div className="bg-dark rounded-md p-4 hover:bg-[#111] transition duration-200 h-full flex flex-col border border-gray-700">
         {agent.logo && (
-          <div className="h-16 w-16  mb-4 relative">
+          <div className="h-12 w-12  mb-4 relative">
             <Image
               src={agent.logo}
               alt={agent.name}

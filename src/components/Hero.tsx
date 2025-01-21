@@ -1,5 +1,5 @@
 import React from "react";
-
+import Categories from "./Categories";
 interface HeroProps {
   title: string;
 }
@@ -9,15 +9,15 @@ function Hero({ title }: HeroProps) {
   const splitTitle = title.split("<br />");
 
   return (
-    <section className="text-white py-20 md:py-32 lg:py-40">
-      <div className="px-4 text-center">
+    <section className="text-white py-16">
+      <div className="px-4 text-center mb-16">
         {/* New AI Agents Badge */}
         <div className="bg-blue-500 text-white text-sm py-1 px-3 rounded-full inline-block mb-8">
           🔥 38 new AI agents added last week
         </div>
 
         {/* Dynamic Main Heading */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 !leading-tight">
           {splitTitle.map((part, index) => (
             <React.Fragment key={index}>
               {part}
@@ -49,6 +49,9 @@ function Hero({ title }: HeroProps) {
           Join 1000+ AI agents enthusiasts
         </p>
       </div>
+
+      {/* Categories Component */}
+      <Categories />
     </section>
   );
 }

@@ -19,12 +19,14 @@ interface Agent {
 const AgentCard = ({ agent }: { agent: Agent }) => {
   return (
     <Link href={`/agents/${agent.slug}`} key={agent._id}>
-      <div className="bg-dark rounded-md shadow-md overflow-hidden flex flex-col p-1 border border-gray-500">
+      <div className="bg-dark hover:bg-[#111] rounded-md shadow-md overflow-hidden flex flex-col p-1 border border-gray-500">
         <div className="h-24 w-24 p-4 ">
           <Image
             src={agent.logo ?? ""}
             alt={agent.name}
             className="w-full rounded-full"
+            width={24}
+            height={24}
           />
         </div>
         <div className="p-4 flex flex-col flex-grow">
