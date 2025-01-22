@@ -12,10 +12,13 @@ const GoogleAnalytics = () => {
     document.head.appendChild(script);
 
     script.onload = () => {
+      // Initialize dataLayer and gtag function
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function () {
-        window.dataLayer && window.dataLayer.push(arguments);
+      window.gtag = function (...args: any[]) {
+        // Type assertion here to ensure dataLayer is defined
+        (window.dataLayer as any[]).push(args); // Type assertion to guarantee it's an array
       };
+
       window.gtag("js", new Date());
 
       // Initialize GA4 with your tracking ID
