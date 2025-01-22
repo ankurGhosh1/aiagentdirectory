@@ -1,13 +1,12 @@
-// pages/categories/[category].tsx
 import React from "react";
-import { agentData } from "../../data/aiagent";
-import AgentCard from "../../components/AgentCard";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { GetServerSideProps } from "next";
+import axios from "axios";
 import Layout from "@/components/Layout";
 import Container from "@/components/Container";
 import Hero from "@/components/Hero";
 import SEO from "@/components/SEO";
+import AgentCard from "@/components/AgentCard";
+
 interface Agent {
   _id: string;
   logo: string | null;
@@ -20,185 +19,57 @@ interface Agent {
   website?: string;
   longDescription?: string;
   keyFeatures?: string[];
+  industry?: string;
 }
 
-const CategoryPage = () => {
-  const industryMetaData = [
-    {
-      industry: "technology",
-      metaTitle: "Explore AI Technology Tools",
-      metaDescription:
-        "Simplify development, enhance efficiency, and streamline workflows with AI solutions built for innovators and tech leaders.",
-    },
-    {
-      industry: "marketing",
-      metaTitle: "Explore AI Marketing Tools",
-      metaDescription:
-        "Discover the best AI agents tailored to elevate your marketing efforts. From personalized customer experiences to automated campaigns, these AI tools help you optimize reach, improve engagement, and drive conversions effortlessly.",
-    },
-    {
-      industry: "sales",
-      metaTitle: "Explore AI Sales Tools",
-      metaDescription:
-        " Explore the top AI agents designed to boost your sales performance. Automate lead generation, improve customer interactions, and close deals faster with smart sales tools built for success.",
-    },
-    {
-      industry: "entertainment",
-      metaTitle: "Explore AI Entertainment Tools",
-      metaDescription:
-        "Explore the top AI agents transforming the entertainment industry. From personalized content recommendations to immersive experiences, these tools redefine how audiences engage with entertainment.",
-    },
-    {
-      industry: "travel-hospitality",
-      metaTitle: "Explore AI Travel & Hospitality Tools",
-      metaDescription:
-        "Discover AI agents tailored for the travel industry. Optimize trip planning, provide personalized itineraries, and improve customer satisfaction with AI tools built for travel experts",
-    },
-    {
-      industry: "real-estate",
-      metaTitle: "Explore AI Real Estate Tools",
-      metaDescription:
-        "Find the best AI agents for the real estate sector. From property matching to customer management, these tools streamline operations and enhance client experiences.",
-    },
-    {
-      industry: "e-commerce",
-      metaTitle: "Explore AI E-Commerce Tools",
-      metaDescription:
-        "Unlock the potential of AI agents for your e-commerce platform. Enhance product recommendations, streamline inventory management, and drive personalized shopping experiences with AI.",
-    },
-    {
-      industry: "finance",
-      metaTitle: "Explore AI Finance Tools",
-      metaDescription:
-        "Explore top AI agents tailored for the finance industry. Improve risk management, automate transactions, and deliver insightful analytics to enhance financial operations and customer satisfaction.",
-    },
-    {
-      industry: "manufacturing",
-      metaTitle: "Explore AI Manufacturing Tools",
-      metaDescription:
-        "Discover AI agents built for manufacturing excellence. Streamline production, improve quality control, and optimize supply chains with cutting-edge AI solutions.",
-    },
-    {
-      industry: "Legal",
-      metaTitle: "Explore AI Legal Tools",
-      metaDescription:
-        "Explore AI agents designed to support legal professionals. From contract analysis to case research, these tools enhance efficiency, accuracy, and client service.",
-    },
-    {
-      industry: "education",
-      metaTitle: "Explore AI Education Tools",
-      metaDescription:
-        "Discover AI agents revolutionizing education. Personalize learning experiences, streamline administrative tasks, and engage students with intelligent education tools.",
-    },
-    {
-      industry: "human-resource",
-      metaTitle: "Explore AI Human Resource Tools",
-      metaDescription:
-        "Discover AI agents revolutionizing HR. Automate talent acquisition, personalize employee experiences, and empower HR teams with intelligent tools.",
-    },
-    {
-      industry: "energy-utilities",
-      metaTitle: "Explore AI Energy Utilities Tools",
-      metaDescription:
-        "Discover AI solutions revolutionizing energy and utilities. Optimize grid management, predict equipment failure, and empower customers with intelligent energy tools.",
-    },
-  ];
+interface Props {
+  agents: Agent[];
+  industry: string;
+  total: number;
+  meta: string;
+  error?: string;
+}
 
-  const router = useRouter();
-  const { industries } = router.query;
-  const [filteredAgents, setFilteredAgents] = useState<Agent[]>([]);
-  const [visibleAgents, setVisibleAgents] = useState(30);
-  const [isLoading, setIsLoading] = useState(true);
-  const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    if (router.isReady) {
-      if (industries) {
-        const filtered = agentData.filter(
-          (agent) =>
-            agent.industry?.toLowerCase() ===
-            industries.toString().toLowerCase()
-        );
-        setFilteredAgents(filtered);
-        setTotal(filtered.length);
-      }
-      setIsLoading(false);
-    }
-  }, [router.isReady, industries]);
-
-  const displayedAgents = filteredAgents.slice(0, visibleAgents); // Agents to display
+const CategoryPage = ({ agents, industry, total, meta }: Props) => {
+  const [visibleAgents, setVisibleAgents] = React.useState(30);
 
   const handleLoadMore = () => {
-    setVisibleAgents(
-      (prevVisibleAgents) =>
-        Math.min(prevVisibleAgents + 8, filteredAgents.length) // Load 8 more
-    );
+    setVisibleAgents((prev) => Math.min(prev + 8, agents.length));
   };
 
-  if (isLoading) {
-    return <div className="text-center mt-8 text-white">Loading...</div>;
-  }
-
-  if (!industries) {
-    return (
-      <div className="text-center mt-8 text-white">Category not found</div>
-    );
-  }
-
-  const industryMeta = industryMetaData.find(
-    (meta) =>
-      meta.industry.toLowerCase() === industries.toString().toLowerCase()
-  );
-
   return (
-    <React.Fragment>
+    <>
       <SEO
-        title={`Top ${total} AI Agents in ${industries
-          .toString()
-          .split("-")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")}`}
+        title={`Top ${total} AI Agents in ${industry}`}
         description={
-          industryMeta
-            ? industryMeta.metaDescription
-            : "Explore top AI agents in various industries."
+          meta || `Find the best AI agents in ${industry} productivity stack.`
         }
-        url={`https://aiagentlisting.com/categories/${industries}`}
-        canonicalUrl={`https://aiagentlisting.com/categories/${industries}`}
+        url={`https://aiagentlisting.com/categories/${industry}`}
+        canonicalUrl={`https://aiagentlisting.com/categories/${industry}`}
       />
       <Container>
         <Layout>
           <Hero
-            title={`Top ${total} AI Agents in <br /> ${industries
-              .toString()
-              .split("-")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")} Productivity Stack`}
-            badgeTitle={`${industries
-              .toString()
-              .split("-")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")} AI Agents`}
+            title={`Top ${total} AI Agents in ${industry}`}
+            badgeTitle={`${industry} AI Agents`}
           />
           <div className="text-gray-300 py-12 px-4 min-h-screen">
             <div className="container mx-auto">
               <h2 className="text-3xl font-bold text-white mb-8 capitalize">
-                {industries.toString().split("-").join(" ")} AI Agents
+                {industry} AI Agents
               </h2>
-              {filteredAgents.length === 0 ? (
+              {agents.length === 0 ? (
                 <p className="text-center text-gray-500">
                   No agents found in this category.
                 </p>
               ) : (
                 <div>
-                  {" "}
-                  {/* Added a wrapping div */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {displayedAgents.map((agent) => (
+                    {agents.slice(0, visibleAgents).map((agent) => (
                       <AgentCard key={agent._id} agent={agent} />
                     ))}
                   </div>
-                  {visibleAgents < filteredAgents.length && (
+                  {visibleAgents < agents.length && (
                     <div className="text-center mt-12">
                       <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -214,8 +85,95 @@ const CategoryPage = () => {
           </div>
         </Layout>
       </Container>
-    </React.Fragment>
+    </>
   );
+};
+
+// Server-Side Props
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context
+) => {
+  const AIRTABLE_BASE_ID = process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID!;
+  const AIRTABLE_API_KEY = process.env.NEXT_PUBLIC_AIRTABLE_AI_AGENT!;
+  const AIRTABLE_TABLE_NAME = "Agents";
+  const AIRTABLE_META_TABLE = "Metas";
+
+  const { industries } = context.params || {};
+  if (!industries) {
+    return {
+      notFound: true,
+    };
+  }
+
+  try {
+    const allAgents: Agent[] = [];
+    let offset: string | undefined = undefined;
+
+    // Fetch agents from Airtable
+    do {
+      const response: { data: { records: any[]; offset?: string } } =
+        await axios.get(
+          `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`,
+          {
+            headers: {
+              Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+            },
+            params: {
+              offset,
+            },
+          }
+        );
+      allAgents.push(
+        ...response.data.records.map((record: any) => ({
+          _id: record.id,
+          ...record.fields,
+        }))
+      );
+      offset = response.data.offset;
+    } while (offset);
+
+    // Filter agents by industry
+    const filteredAgents = allAgents.filter(
+      (agent) =>
+        agent.industry?.toLowerCase() === industries.toString().toLowerCase()
+    );
+
+    // Fetch meta description for the category
+    const metaResponse: { data: { records: any[] } } = await axios.get(
+      `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_META_TABLE}`,
+      {
+        headers: {
+          Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+        },
+      }
+    );
+
+    const metaRecord = metaResponse.data.records.find(
+      (record) => record.fields.slug === industries
+    );
+
+    const meta = metaRecord ? metaRecord.fields.meta : "";
+
+    return {
+      props: {
+        agents: filteredAgents,
+        industry: industries.toString().replace(/-/g, " ").toLowerCase(),
+        total: filteredAgents.length,
+        meta,
+      },
+    };
+  } catch (error) {
+    console.error("Airtable Fetch Error:", error);
+    return {
+      props: {
+        agents: [],
+        industry: industries.toString().replace(/-/g, " ").toLowerCase(),
+        total: 0,
+        meta: "",
+        error: "Failed to fetch data.",
+      },
+    };
+  }
 };
 
 export default CategoryPage;

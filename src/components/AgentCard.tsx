@@ -6,7 +6,6 @@ interface Agent {
   logo: string | null;
   name: string;
   shortDescription: string;
-  access: string;
   pricingModel: string;
   category: string;
   slug: string;

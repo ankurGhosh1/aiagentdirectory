@@ -1,9 +1,8 @@
+// components/Agents.tsx
+
 import React, { useState } from "react";
-import { agentData } from "../data/aiagent";
 import Link from "next/link";
 import Image from "next/image";
-
-const agents = agentData;
 
 interface Agent {
   _id: string;
@@ -16,17 +15,21 @@ interface Agent {
   slug: string;
 }
 
+interface AgentsProps {
+  agents: Agent[];
+}
+
 const AgentCard = ({ agent }: { agent: Agent }) => {
   return (
     <Link href={`/agents/${agent.slug}`} key={agent._id}>
-      <div className="bg-dark hover:bg-[#111] rounded-md shadow-md overflow-hidden flex flex-col p-1 border border-gray-500">
-        <div className="h-24 w-24 p-4 ">
+      <div className="bg-dark hover:bg-[#111] rounded-md shadow-md overflow-hidden flex flex-col p-1 border border-gray-500 h-full">
+        <div className="h-24 w-24 p-4">
           <Image
-            src={agent.logo ?? ""}
+            src={agent.logo ?? "/default-logo.png"} // Fallback to default logo
             alt={agent.name}
             className="w-full rounded-full"
-            width={24}
-            height={24}
+            width={48}
+            height={48}
           />
         </div>
         <div className="p-4 flex flex-col flex-grow">
@@ -58,7 +61,7 @@ const AgentCard = ({ agent }: { agent: Agent }) => {
   );
 };
 
-const AgentGrid = () => {
+const Agents = ({ agents }: AgentsProps) => {
   const [visibleAgents, setVisibleAgents] = useState(21);
 
   const handleLoadMore = () => {
@@ -70,8 +73,8 @@ const AgentGrid = () => {
   const displayedAgents = agents.slice(0, visibleAgents);
 
   return (
-    <div className=" py-24">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="py-24">
+      <div className="grid items-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {displayedAgents.map((agent) => (
           <AgentCard key={agent._id} agent={agent} />
         ))}
@@ -90,4 +93,4 @@ const AgentGrid = () => {
   );
 };
 
-export default AgentGrid;
+export default Agents;
