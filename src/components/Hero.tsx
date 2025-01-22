@@ -3,9 +3,10 @@ import Categories from "./Categories";
 
 interface HeroProps {
   title: string;
+  badgeTitle?: string;
 }
 
-function Hero({ title }: HeroProps) {
+function Hero({ title, badgeTitle }: HeroProps) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const splitTitle = title.split("<br />");
@@ -45,7 +46,7 @@ function Hero({ title }: HeroProps) {
       <div className="px-4 text-center mb-16">
         {/* New AI Agents Badge */}
         <div className="bg-blue-500 text-white text-sm py-1 px-3 rounded-full inline-block mb-8">
-          🔥 38 new AI agents added last week
+          {badgeTitle || `🔥 38 new AI agents added last week`}
         </div>
 
         {/* Dynamic Main Heading */}

@@ -20,9 +20,10 @@ const AgentProfile = () => {
   return (
     <React.Fragment>
       <SEO
-        title={`AI Agents ${agent.name} in ${agent.industry}`}
+        title={`${agent.name} - AI Agent Review & Alternatives (2025)`}
         description={`Top AI Agents in ${agent.name} in ${agent.industry}`}
         url={`https://aiagentlisting.com/agents/${slug}`}
+        canonicalUrl={`https://aiagentlisting.com/agents/${slug}`}
       />
       <Container>
         <Layout>

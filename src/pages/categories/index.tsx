@@ -19,6 +19,7 @@ const CategoriesPage = () => {
         title={`Top AI Agents Categories to Boost Your Productivity`}
         description={`Top AI Agents Categories to Boost Your Productivity`}
         url={`https://aiagentlisting.com/categories`}
+        canonicalUrl={`https://aiagentlisting.com/categories`}
       />
       <Container>
         <Layout>

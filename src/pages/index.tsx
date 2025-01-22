@@ -24,6 +24,7 @@ export default function Home() {
         title={`Top AI Agents in to Boost Your Productivity`}
         description={`Top AI Agents in to Boost Your Productivity`}
         url={`https://aiagentlisting.com/`}
+        canonicalUrl={`https://aiagentlisting.com/`}
       />
       <Container>
         <Layout>
