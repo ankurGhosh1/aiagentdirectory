@@ -54,7 +54,7 @@ const AgentProfile = ({ agent }: Props) => {
         title={`${agent.name} - AI Agent Review & Alternatives (2025)`}
         description={`Top AI Agents ${agent.name} in ${agent.industry}`}
         url={`https://aiagentlisting.com/agents/${agent.slug}`}
-        canonicalUrl={`https://aiagentlisting.com/agents/${agent.slug}`}
+        canonicalUrl={`https://www.aiagentlisting.com/agents/${agent.slug}`}
       />
       <Container>
         <Layout>

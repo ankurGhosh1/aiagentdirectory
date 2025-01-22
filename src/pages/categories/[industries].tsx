@@ -45,7 +45,7 @@ const CategoryPage = ({ agents, industry, total, meta }: Props) => {
           meta || `Find the best AI agents in ${industry} productivity stack.`
         }
         url={`https://aiagentlisting.com/categories/${industry}`}
-        canonicalUrl={`https://aiagentlisting.com/categories/${industry}`}
+        canonicalUrl={`https://www.aiagentlisting.com/categories/${industry}`}
       />
       <Container>
         <Layout>

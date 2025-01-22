@@ -11,7 +11,7 @@ function Contact() {
         title={`Submit Your AI Agent to Boost Your Visibility`}
         description={`Submit Your AI Agent to Boost Your Visibility`}
         url={`https://aiagentlisting.com/contact`}
-        canonicalUrl={`https://aiagentlisting.com/contact`}
+        canonicalUrl={`https://www.aiagentlisting.com/contact`}
       />
       <Layout>
         <Container>

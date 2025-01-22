@@ -21,55 +21,59 @@ const Footer = () => {
             <h4 className="text-white font-bold text-lg mb-2">Categories</h4>
             <ul className="text-sm space-y-2 columns-2">
               <li>
-                <Link href="/technology">Technology</Link>
+                <Link href="/categories/technology">Technology</Link>
               </li>
               <li>
-                <Link href="/human-resource">Human Resource</Link>
+                <Link href="/categories/human-resource">Human Resource</Link>
               </li>
               <li>
-                <Link href="/marketing">Marketing</Link>
+                <Link href="/categories/marketing">Marketing</Link>
               </li>
               <li>
-                <Link href="/e-commerce">E-Commerce</Link>
+                <Link href="/categories/e-commerce">E-Commerce</Link>
               </li>
               <li>
-                <Link href="/healthcare">Healthcare</Link>
+                <Link href="/categories/healthcare">Healthcare</Link>
               </li>
               <li>
-                <Link href="/education">Education</Link>
+                <Link href="/categories/education">Education</Link>
               </li>
               <li>
-                <Link href="/travel-hospitality">Travel & Hospitality</Link>
+                <Link href="/categories/travel-hospitality">
+                  Travel & Hospitality
+                </Link>
               </li>
               <li>
-                <Link href="/real-estate">Real Estate</Link>
+                <Link href="/categories/real-estate">Real Estate</Link>
               </li>
               <li>
-                <Link href="/sales"></Link>
+                <Link href="/categories/sales"></Link>
               </li>
               <li>
-                <Link href="/marketing">Marketing</Link>
+                <Link href="/categories/marketing">Marketing</Link>
               </li>
               <li>
-                <Link href="/finance">Finance</Link>
+                <Link href="/categories/finance">Finance</Link>
               </li>
               <li>
-                <Link href="/manufaturing">Manufaturing</Link>
+                <Link href="/categories/manufaturing">Manufaturing</Link>
               </li>
               <li>
-                <Link href="/legal">Legal</Link>
+                <Link href="/categories/legal">Legal</Link>
               </li>
               <li>
-                <Link href="/horizontal">Horizontal</Link>
+                <Link href="/categories/horizontal">Horizontal</Link>
               </li>
               <li>
-                <Link href="/vertical">Vertical</Link>
+                <Link href="/categories/vertical">Vertical</Link>
               </li>
               <li>
-                <Link href="/energy-utilities">Energy & Utilities</Link>
+                <Link href="/categories/energy-utilities">
+                  Energy & Utilities
+                </Link>
               </li>
               <li>
-                <Link href="/others">Others</Link>
+                <Link href="/categories/others">Others</Link>
               </li>
             </ul>
           </div>

@@ -35,7 +35,7 @@ const CategoriesPage: React.FC<CategoriesPageProps> = ({ agents }) => {
         title={`Top AI Agents of All Categories`}
         description={`Top AI Agents Categories to Boost Your Productivity`}
         url={`https://aiagentlisting.com/categories`}
-        canonicalUrl={`https://aiagentlisting.com/categories`}
+        canonicalUrl={`https://www.aiagentlisting.com/categories`}
       />
       <Container>
         <Layout>

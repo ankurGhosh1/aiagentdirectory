@@ -31,7 +31,7 @@ const Home = ({ agents }: Props) => {
         title={`Top AI Agents to Boost Your Productivity`}
         description={`Discover the best AI agents to enhance your workflows and productivity.`}
         url={`https://aiagentlisting.com/`}
-        canonicalUrl={`https://aiagentlisting.com/`}
+        canonicalUrl={`https://www.aiagentlisting.com/`}
       />
       <Container>
         <Layout>
