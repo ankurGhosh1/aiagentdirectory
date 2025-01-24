@@ -1,5 +1,4 @@
 // pages/index.tsx
-
 import React from "react";
 import Layout from "@/components/Layout";
 import Container from "@/components/Container";
@@ -21,22 +20,23 @@ interface Agent {
 }
 
 interface Props {
-  agents: Agent[];
+  initialAgents: Agent[];
+  initialOffset: string | null;
 }
 
-const Home = ({ agents }: Props) => {
+const Home = ({ initialAgents, initialOffset }: Props) => {
   return (
     <React.Fragment>
       <SEO
         title={`Top AI Agents to Boost Your Productivity`}
         description={`Discover the best AI agents to enhance your workflows and productivity.`}
-        url={`https://aiagentlisting.com/`}
+        url={`https://www.aiagentlisting.com/`}
         canonicalUrl={`https://www.aiagentlisting.com/`}
       />
       <Container>
         <Layout>
           <Hero title={`Discover Your Next <br />AI Productivity Stack`} />
-          <Agents agents={agents} />
+          <Agents initialAgents={initialAgents} initialOffset={initialOffset} />
         </Layout>
       </Container>
     </React.Fragment>
@@ -44,46 +44,26 @@ const Home = ({ agents }: Props) => {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const AIRTABLE_BASE_ID = process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID!;
-  const AIRTABLE_API_KEY = process.env.NEXT_PUBLIC_AIRTABLE_AI_AGENT!;
-  const AIRTABLE_TABLE_NAME = "Agents";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
   try {
-    const allAgents: Agent[] = [];
-    let offset: string | undefined = undefined;
-
-    do {
-      const response: { data: { records: any[]; offset?: string } } =
-        await axios.get(
-          `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`,
-          {
-            headers: {
-              Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-            },
-            params: {
-              offset,
-            },
-          }
-        );
-      allAgents.push(
-        ...response.data.records.map((record: any) => ({
-          _id: record.id,
-          ...record.fields,
-        }))
-      );
-      offset = response.data.offset;
-    } while (offset);
+    const response = await axios.get(`${apiUrl}/api/agents`, {
+      params: { limit: 30 },
+    });
+    const { records, offset } = response.data;
 
     return {
       props: {
-        agents: allAgents,
+        initialAgents: records,
+        initialOffset: offset || null,
       },
     };
   } catch (error) {
-    console.error("Airtable Fetch Error:", error);
+    console.error("Error fetching initial agents:", error);
     return {
       props: {
-        agents: [],
+        initialAgents: [],
+        initialOffset: null,
       },
     };
   }

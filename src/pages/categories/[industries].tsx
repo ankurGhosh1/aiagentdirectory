@@ -50,13 +50,17 @@ const CategoryPage = ({ agents, industry, total, meta }: Props) => {
       <Container>
         <Layout>
           <Hero
-            title={`Top ${total} AI Agents in ${industry}`}
-            badgeTitle={`${industry} AI Agents`}
+            title={`Top ${total} AI Agents in ${
+              industry.charAt(0).toUpperCase() + industry.slice(1)
+            }`}
+            badgeTitle={`${
+              industry.charAt(0).toUpperCase() + industry.slice(1)
+            } AI Agents`}
           />
           <div className="text-gray-300 py-12 px-4 min-h-screen">
             <div className="container mx-auto">
               <h2 className="text-3xl font-bold text-white mb-8 capitalize">
-                {industry} AI Agents
+                {industry.charAt(0).toUpperCase() + industry.slice(1)} AI Agents
               </h2>
               {agents.length === 0 ? (
                 <p className="text-center text-gray-500">
