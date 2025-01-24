@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Categories from "./Categories";
+import Link from "next/link";
 
 interface HeroProps {
   title: string;
@@ -64,6 +65,19 @@ function Hero({ title, badgeTitle }: HeroProps) {
           Browse our elite collection of AI agents and build your digital
           workforce in minutes, not months.
         </p>
+
+        <Link
+          href="https://www.producthunt.com/posts/ai-agent-listing?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-ai&#0045;agent&#0045;listing"
+          target="_blank"
+        >
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=816515&theme=light&t=1737735525133"
+            alt="AI&#0032;Agent&#0032;Listing - The&#0032;AI&#0032;Finder | Product Hunt"
+            width="250"
+            height="54"
+            className="w-[250px] h-[54px] mx-auto mb-8"
+          />
+        </Link>
 
         {/* Email Subscription Form */}
         <form

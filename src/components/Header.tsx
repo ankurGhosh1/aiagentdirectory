@@ -7,9 +7,9 @@ function Header() {
 
   return (
     <Container>
-      <header className="flex flex-col md:flex-row justify-between items-center p-4 text-white">
+      <header className="flex flex-col md:flex-row justify-between items-center p-4 text-white relative">
         <div className="md:hidden flex justify-between items-center w-full">
-          <div className="text-2xl font-bold">Logo</div>
+          <img src="/logo.png" className="h-12 w-12" />
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-white focus:outline-none"
@@ -19,7 +19,7 @@ function Header() {
         </div>
         <nav
           className={`${
-            isOpen ? "block" : "hidden"
+            isOpen ? "flex flex-col gap-4 items-start justify-start" : "hidden"
           } md:flex gap-4 mb-4 md:mb-0 w-full md:w-auto`}
         >
           <Link href="/" className="hover:underline">
@@ -28,12 +28,16 @@ function Header() {
           <Link href="/categories" className="hover:underline">
             Categories
           </Link>
+          <Link
+            className="md:hidden bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded decoration-none"
+            href="/contact"
+          >
+            Submit a new listing
+          </Link>
         </nav>
-        <div className="hidden md:block flex-1 text-center text-2xl font-bold mb-4 md:mb-0">
-          Logo
-        </div>
+        <img src="/logo.png" className="hidden md:block h-12 w-12" />
         <Link
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded decoration-none"
+          className="hidden md:block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded decoration-none"
           href="/contact"
         >
           Submit a new listing
