@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Container from "./Container";
+import Image from "next/image";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +10,15 @@ function Header() {
     <Container>
       <header className="flex flex-col md:flex-row justify-between items-center p-4 text-white relative">
         <div className="md:hidden flex justify-between items-center w-full">
-          <img src="/logo.png" className="h-12 w-12" />
+          <Link href="/" className="hover:underline">
+            <Image
+              src="/logo.png"
+              className="h-12 w-12"
+              height={12}
+              width={12}
+              alt="AI Agent Listing"
+            />
+          </Link>
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-white focus:outline-none"
@@ -35,7 +44,15 @@ function Header() {
             Submit a new listing
           </Link>
         </nav>
-        <img src="/logo.png" className="hidden md:block h-12 w-12" />
+        <Link href="/" className="hover:underline">
+          <Image
+            src="/logo.png"
+            className="h-12 w-12"
+            height={12}
+            width={12}
+            alt="AI Agent Listing"
+          />
+        </Link>
         <Link
           className="hidden md:block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded decoration-none"
           href="/contact"
