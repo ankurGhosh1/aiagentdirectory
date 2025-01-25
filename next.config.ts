@@ -8,6 +8,7 @@ const nextConfig = {
         hostname: "storage.googleapis.com",
       },
     ],
+    unoptimized: true,
   },
 };
 
