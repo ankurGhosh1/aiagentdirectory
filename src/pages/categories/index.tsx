@@ -7,7 +7,7 @@ import Container from "@/components/Container";
 import Hero from "@/components/Hero";
 import SEO from "@/components/SEO";
 import { GetServerSideProps } from "next";
-
+import Link from "next/link";
 interface Agent {
   _id: string;
   logo: string | null;
@@ -39,7 +39,7 @@ const CategoriesPage: React.FC<CategoriesPageProps> = ({ agents }) => {
       />
       <Container>
         <Layout>
-          <Hero title={`Discover Your Next <br /> AI Productivity Stack`} />
+          <Hero title={`Find The Best AI Agent <br /> For Your Business`} />
           <div className="text-gray-300 py-12 min-h-screen">
             <h1 className="text-3xl font-bold text-white mb-8">
               All Categories
@@ -48,9 +48,11 @@ const CategoriesPage: React.FC<CategoriesPageProps> = ({ agents }) => {
               {uniqueCategories.map((industry) => (
                 <div key={industry} className="bg-dark rounded-md p-6">
                   {/* Category card */}
-                  <h2 className="text-xl font-bold text-white mb-4 capitalize">
-                    {industry}
-                  </h2>
+                  <Link href={`/categories/${industry}`}>
+                    <h2 className="text-xl font-bold text-white mb-4 capitalize">
+                      {industry}
+                    </h2>
+                  </Link>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {agents
                       .filter((agent) => agent.industry === industry)

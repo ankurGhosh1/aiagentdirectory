@@ -8,9 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr_1fr] gap-8">
           {/* AI Agents List Section */}
           <div>
-            <h4 className="text-white font-bold text-lg mb-2">
-              AI Agents List
-            </h4>
+            <p className="text-white font-bold text-lg mb-2">AI Agents List</p>
             <p className="text-sm">
               Discover the best AI agents from across the internet.
             </p>
@@ -18,7 +16,7 @@ const Footer = () => {
 
           {/* Categories Section */}
           <div>
-            <h4 className="text-white font-bold text-lg mb-2">Categories</h4>
+            <p className="text-white font-bold text-lg mb-2">Categories</p>
             <ul className="text-sm space-y-2 columns-2">
               <li>
                 <Link href="/categories/technology">Technology</Link>
@@ -80,7 +78,7 @@ const Footer = () => {
 
           {/* Navigation Section */}
           <div>
-            <h4 className="text-white font-bold text-lg mb-2">Navigation</h4>
+            <p className="text-white font-bold text-lg mb-2">Navigation</p>
             <ul className="text-sm space-y-1">
               <li>
                 <Link href="/">All Agents</Link>
@@ -96,9 +94,9 @@ const Footer = () => {
 
           {/* Collaboration Section */}
           <div>
-            <h4 className="text-white font-bold text-lg mb-2">Collaboration</h4>
+            <p className="text-white font-bold text-lg mb-2">Collaboration</p>
             <ul className="text-sm space-y-1">
-              <li>hello@aiagentslist.com</li>
+              <li>aiagentlisting@gmail.com</li>
               {/* <li className="font-bold mt-2 text-white">See also</li>
               <li>Sprunki Mod</li>
               <li>AI Tool Trek</li>
@@ -113,7 +111,9 @@ const Footer = () => {
         {/* Copyright and X Section */}
         <div className="container mx-auto mt-12 flex justify-between items-center text-sm">
           <p>© 2025 AI Agents List. All rights reserved.</p>
-          <p>X</p> {/* Or an actual X icon/component */}
+          <Link href="https://x.com/aiagentlisting" target="_blank">
+            X
+          </Link>
         </div>
       </footer>
     </Container>

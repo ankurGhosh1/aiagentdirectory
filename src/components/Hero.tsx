@@ -6,9 +6,10 @@ import Image from "next/image";
 interface HeroProps {
   title: string;
   badgeTitle?: string;
+  desc?: string;
 }
 
-function Hero({ title, badgeTitle }: HeroProps) {
+function Hero({ title, badgeTitle, desc }: HeroProps) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const splitTitle = title.split("<br />");
@@ -48,7 +49,7 @@ function Hero({ title, badgeTitle }: HeroProps) {
       <div className="px-4 text-center mb-16">
         {/* New AI Agents Badge */}
         <div className="bg-blue-500 text-white text-sm py-1 px-3 rounded-full inline-block mb-8">
-          {badgeTitle || `🔥 38 new AI agents added last week`}
+          {badgeTitle || `AI agents listing`}
         </div>
 
         {/* Dynamic Main Heading */}
@@ -63,8 +64,10 @@ function Hero({ title, badgeTitle }: HeroProps) {
 
         {/* Sub Heading/Description */}
         <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-          Browse our elite collection of AI agents and build your digital
-          workforce in minutes, not months.
+          {desc
+            ? desc
+            : `Browse our elite collection of AI agents and build your digital
+          workforce in minutes, not months.`}
         </p>
 
         <Link

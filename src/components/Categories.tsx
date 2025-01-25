@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router"; // Import for routing
 
 const categories = [
-  { name: "All", url: "/", icon: "💯" }, // You'll need to replace these with actual icons or SVGs
+  { name: "All", url: "/categories", icon: "💯" }, // You'll need to replace these with actual icons or SVGs
   { name: "Technology", url: "/technology", icon: "💻" },
   { name: "Healthcare", url: "/Healthcare", icon: "💼" },
   { name: "Entertainment", url: "/Entertainment", icon: "📈" },

@@ -22,15 +22,23 @@ interface Agent {
   industry?: string;
 }
 
+interface MetaData {
+  meta: string;
+  title: string;
+  headingOne: string;
+  description: string;
+  headingTwo: string;
+}
+
 interface Props {
   agents: Agent[];
   industry: string;
   total: number;
-  meta: string;
+  metaData: MetaData;
   error?: string;
 }
 
-const CategoryPage = ({ agents, industry, total, meta }: Props) => {
+const CategoryPage = ({ agents, industry, total, metaData }: Props) => {
   const [visibleAgents, setVisibleAgents] = React.useState(30);
 
   const handleLoadMore = () => {
@@ -40,27 +48,38 @@ const CategoryPage = ({ agents, industry, total, meta }: Props) => {
   return (
     <>
       <SEO
-        title={`Top ${total} AI Agents in ${industry}`}
+        title={metaData.title || `Top ${total} AI Agents in ${industry}`}
         description={
-          meta || `Find the best AI agents in ${industry} productivity stack.`
+          metaData.meta ||
+          `Find the best AI agents in ${industry} productivity stack.`
         }
         url={`https://aiagentlisting.com/categories/${industry}`}
-        canonicalUrl={`https://www.aiagentlisting.com/categories/${industry}`}
+        canonicalUrl={`https://www.aiagentlisting.com/categories/${industry
+          .toString()
+          .split(" ")
+          .join("-")}`}
       />
       <Container>
         <Layout>
           <Hero
-            title={`Top ${total} AI Agents in ${
-              industry.charAt(0).toUpperCase() + industry.slice(1)
-            }`}
+            title={
+              metaData.headingOne ||
+              `Top ${total} AI Agents in ${
+                industry.charAt(0).toUpperCase() + industry.slice(1)
+              }`
+            }
             badgeTitle={`${
               industry.charAt(0).toUpperCase() + industry.slice(1)
             } AI Agents`}
+            desc={metaData.description}
           />
           <div className="text-gray-300 py-12 px-4 min-h-screen">
             <div className="container mx-auto">
               <h2 className="text-3xl font-bold text-white mb-8 capitalize">
-                {industry.charAt(0).toUpperCase() + industry.slice(1)} AI Agents
+                {metaData.headingTwo ||
+                  `${
+                    industry.charAt(0).toUpperCase() + industry.slice(1)
+                  } AI Agents`}
               </h2>
               {agents.length === 0 ? (
                 <p className="text-center text-gray-500">
@@ -142,7 +161,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
         agent.industry?.toLowerCase() === industries.toString().toLowerCase()
     );
 
-    // Fetch meta description for the category
+    // Fetch meta data for the category
     const metaResponse: { data: { records: any[] } } = await axios.get(
       `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_META_TABLE}`,
       {
@@ -156,14 +175,20 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       (record) => record.fields.slug === industries
     );
 
-    const meta = metaRecord ? metaRecord.fields.meta : "";
+    const metaData: MetaData = {
+      meta: metaRecord?.fields.meta || "",
+      title: metaRecord?.fields.title || "",
+      headingOne: metaRecord?.fields.headingOne || "",
+      description: metaRecord?.fields.description || "",
+      headingTwo: metaRecord?.fields.headingTwo || "",
+    };
 
     return {
       props: {
         agents: filteredAgents,
         industry: industries.toString().replace(/-/g, " ").toLowerCase(),
         total: filteredAgents.length,
-        meta,
+        metaData,
       },
     };
   } catch (error) {
@@ -173,7 +198,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
         agents: [],
         industry: industries.toString().replace(/-/g, " ").toLowerCase(),
         total: 0,
-        meta: "",
+        metaData: {
+          meta: "",
+          title: "",
+          headingOne: "",
+          description: "",
+          headingTwo: "",
+        },
         error: "Failed to fetch data.",
       },
     };

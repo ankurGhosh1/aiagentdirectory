@@ -35,7 +35,7 @@ const Home = ({ initialAgents, initialOffset }: Props) => {
       />
       <Container>
         <Layout>
-          <Hero title={`Discover Your Next <br />AI Productivity Stack`} />
+          <Hero title={`Find The Best AI Agent <br /> For Your Business`} />
           <Agents initialAgents={initialAgents} initialOffset={initialOffset} />
         </Layout>
       </Container>

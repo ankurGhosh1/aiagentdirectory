@@ -28,7 +28,7 @@ function SEO(props: SEOProps) {
     name: title,
     description: description,
     url: url,
-    image: image,
+    image: "https://www.aiagentlisting.com/logo.png",
   };
 
   return (
