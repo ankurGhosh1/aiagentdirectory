@@ -176,10 +176,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     );
 
     const metaData: MetaData = {
-      meta: metaRecord?.fields.meta || "",
-      title: metaRecord?.fields.title || "",
+      meta: metaRecord?.fields.metaDescription || "",
+      title: metaRecord?.fields.metaTitle || "",
       headingOne: metaRecord?.fields.headingOne || "",
-      description: metaRecord?.fields.description || "",
+      description: metaRecord?.fields.headingDescription || "",
       headingTwo: metaRecord?.fields.headingTwo || "",
     };
 

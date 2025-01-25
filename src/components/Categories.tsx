@@ -4,21 +4,21 @@ import { useRouter } from "next/router"; // Import for routing
 const categories = [
   { name: "All", url: "/categories", icon: "💯" }, // You'll need to replace these with actual icons or SVGs
   { name: "Technology", url: "/technology", icon: "💻" },
-  { name: "Healthcare", url: "/Healthcare", icon: "💼" },
-  { name: "Entertainment", url: "/Entertainment", icon: "📈" },
-  { name: "Marketing", url: "/Marketing", icon: "👤" },
+  { name: "Healthcare", url: "/healthcare", icon: "💼" },
+  { name: "Entertainment", url: "/entertainment", icon: "📈" },
+  { name: "Marketing", url: "/marketing", icon: "👤" },
   { name: "Travel & Hospitality", url: "/travel-hospitality", icon: "🌐" },
   { name: "Real Estate", url: "/real-estate", icon: "📝" },
   { name: "E-commerce", url: "/e-commerce", icon: "🔍" },
-  { name: "Finance", url: "/Finance", icon: "🤖" },
-  { name: "Manufacturing", url: "/Manufacturing", icon: "📊" },
-  { name: "Other", url: "/Other", icon: "💰" },
-  { name: "Legal", url: "/Legal", icon: "📢" },
-  { name: "Education", url: "/Education", icon: "🪙" },
+  { name: "Finance", url: "/finance", icon: "🤖" },
+  { name: "Manufacturing", url: "/manufacturing", icon: "📊" },
+  { name: "Other", url: "/other", icon: "💰" },
+  { name: "Legal", url: "/legal", icon: "📢" },
+  { name: "Education", url: "/education", icon: "🪙" },
   { name: "Human Resources", url: "/human-resources", icon: "🎨" },
   { name: "Energy & Utilities", url: "/energy-utilities", icon: "🧮" },
-  { name: "Vertical", url: "/Vertical", icon: "📞" },
-  { name: "Horizontal", url: "/Horizontal", icon: "🧪" },
+  { name: "Vertical", url: "/vertical", icon: "📞" },
+  { name: "Horizontal", url: "/horizontal", icon: "🧪" },
 ];
 
 const CategoryFilter = () => {

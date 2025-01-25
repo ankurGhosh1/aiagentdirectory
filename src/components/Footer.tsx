@@ -22,7 +22,7 @@ const Footer = () => {
                 <Link href="/categories/technology">Technology</Link>
               </li>
               <li>
-                <Link href="/categories/human-resource">Human Resource</Link>
+                <Link href="/categories/human-resources">Human Resource</Link>
               </li>
               <li>
                 <Link href="/categories/marketing">Marketing</Link>
@@ -45,7 +45,7 @@ const Footer = () => {
                 <Link href="/categories/real-estate">Real Estate</Link>
               </li>
               <li>
-                <Link href="/categories/sales"></Link>
+                <Link href="/categories/sales">Sales</Link>
               </li>
               <li>
                 <Link href="/categories/marketing">Marketing</Link>
@@ -54,7 +54,7 @@ const Footer = () => {
                 <Link href="/categories/finance">Finance</Link>
               </li>
               <li>
-                <Link href="/categories/manufaturing">Manufaturing</Link>
+                <Link href="/categories/manufacturing">Manufaturing</Link>
               </li>
               <li>
                 <Link href="/categories/legal">Legal</Link>
@@ -71,7 +71,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/categories/others">Others</Link>
+                <Link href="/categories/other">Others</Link>
               </li>
             </ul>
           </div>
