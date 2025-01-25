@@ -49,7 +49,7 @@ function Hero({ title, badgeTitle, desc }: HeroProps) {
       <div className="px-4 text-center mb-16">
         {/* New AI Agents Badge */}
         <div className="bg-blue-500 text-white text-sm py-1 px-3 rounded-full inline-block mb-8">
-          {badgeTitle || `AI agents listing`}
+          {badgeTitle || `AI AGENT LISTING`}
         </div>
 
         {/* Dynamic Main Heading */}

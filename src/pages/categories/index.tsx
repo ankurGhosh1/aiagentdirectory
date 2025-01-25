@@ -39,7 +39,7 @@ const CategoriesPage: React.FC<CategoriesPageProps> = ({ agents }) => {
       />
       <Container>
         <Layout>
-          <Hero title={`Find The Best AI Agent <br /> For Your Business`} />
+          <Hero title={`Explore Collection of <br /> AI Agents Categories`} />
           <div className="text-gray-300 py-12 min-h-screen">
             <h1 className="text-3xl font-bold text-white mb-8">
               All Categories

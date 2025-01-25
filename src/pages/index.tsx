@@ -28,14 +28,14 @@ const Home = ({ initialAgents, initialOffset }: Props) => {
   return (
     <React.Fragment>
       <SEO
-        title={`Top AI Agents to Boost Your Productivity`}
-        description={`Discover the best AI agents to enhance your workflows and productivity.`}
+        title={`AI Agents Listing & Directory - Find Best AI Agents`}
+        description={`Discover the best AI agents in our comprehensive listing and directory. Compare features, reviews, and pricing to find the perfect AI agent for your needs. Explore now!`}
         url={`https://www.aiagentlisting.com/`}
         canonicalUrl={`https://www.aiagentlisting.com/`}
       />
       <Container>
         <Layout>
-          <Hero title={`Find The Best AI Agent <br /> For Your Business`} />
+          <Hero title={`Find The Best AI Agents <br /> For Your Business`} />
           <Agents initialAgents={initialAgents} initialOffset={initialOffset} />
         </Layout>
       </Container>
