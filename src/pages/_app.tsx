@@ -7,13 +7,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <GoogleAnalytics />
         <meta
           name="google-site-verification"
           content="Iy1NBS2IkZ0mW34o2sSSiyesKPK8cfOXtkzhkAQQeq8"
         />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
+      <GoogleAnalytics />
       <Component {...pageProps} />
     </>
   );

@@ -1,13 +1,16 @@
-// components/GoogleAnalytics.tsx
 import { useEffect } from "react";
 
 const GoogleAnalytics = () => {
   useEffect(() => {
-    if (window.gtag) return;
-
+    const measurementId = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
+    if (!measurementId) {
+      console.error("Google Analytics Measurement ID is missing.");
+      return;
+    }
+    console.log("Adds GA4");
     // Inject GA4 script into the head tag
     const script = document.createElement("script");
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_MEASUREMENT_ID}`;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
     script.async = true;
     document.head.appendChild(script);
 
@@ -15,14 +18,14 @@ const GoogleAnalytics = () => {
       // Initialize dataLayer and gtag function
       window.dataLayer = window.dataLayer || [];
       window.gtag = function (...args: any[]) {
-        // Type assertion here to ensure dataLayer is defined
-        (window.dataLayer as any[]).push(args); // Type assertion to guarantee it's an array
+        if (window.dataLayer) {
+          window.dataLayer.push(args);
+        }
       };
 
+      // Initialize GA4 with the measurement ID
       window.gtag("js", new Date());
-
-      // Initialize GA4 with your tracking ID
-      window.gtag("config", process.env.NEXT_PUBLIC_MEASUREMENT_ID, {
+      window.gtag("config", measurementId, {
         page_path: window.location.pathname,
       });
     };
